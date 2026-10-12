@@ -1,0 +1,34 @@
+{
+  "id": "fpso-erha-class",
+  "name": "Generic West Africa deepwater FPSO (Erha-class)",
+  "disclaimer": "Generic educational model built from public sources only. Not a representation of any operator's actual facility, layout or safety systems.",
+  "hull": {
+    "lengthM": { "value": 285, "source": "offshore-technology" },
+    "breadthM": { "value": 63, "source": "offshore-technology" },
+    "depthM": { "value": 32, "source": "marinelink", "confidence": "low - single secondary source, confirm" }
+  },
+  "storageBbl": { "value": 2200000, "source": "offshore-technology" },
+  "capacities": {
+    "oilBpd": { "value": 210000, "source": "offshore-technology" },
+    "waterInjectionBpd": { "value": 150000, "source": "offshore-technology", "note": "marinelink states over 300,000. Use 150,000 until the OTC paper confirms." },
+    "gasInjectionMmscfd": { "value": 340, "source": "offshore-technology" }
+  },
+  "gasHandling": "Gas reinjection (no routine flaring stated). No gas export reported.",
+  "mooring": { "type": "spread-moored", "lines": null, "source": "offshore-technology" },
+  "waterDepthM": { "range": [1000, 1200], "source": "offshore-technology" },
+  "accommodationPob": { "value": 100, "source": "offshore-technology" },
+  "designLifeYears": { "value": 25, "source": "offshore-technology" },
+  "helideck": true,
+  "offloading": { "method": "Two 16-inch floating hose strings to a CALM buoy", "distanceM": 1850, "position": "Starboard quarter", "source": "offshore-technology" },
+  "subsea": { "drillCentres": 3, "wells": 30, "source": "offshore-technology" },
+  "topsidesModules": {
+    "status": "Generic list. Confirm against the OTC paper.",
+    "list": ["Inlet and separation", "Gas compression", "Gas dehydration", "Gas treatment (case study: amine sweetening)", "Water injection", "Produced water treatment", "Power generation", "Flare", "Cargo tanks", "Offloading", "Accommodation and temporary refuge", "Lifeboats", "Helideck"],
+    "note": "The amine sweetening case is a teaching case applied to the gas train. It is not a claim that this FPSO class has an amine unit."
+  },
+  "sources": {
+    "offshore-technology": "https://www.offshore-technology.com/projects/erha-deepwater-development/",
+    "marinelink": "https://ports.marinelink.com/ports/port/erha-fpso",
+    "otcPaper": "https://onepetro.org/OTCONF/proceedings-abstract/07OTC/07OTC/OTC-18659-MS/36329 (paywalled, not yet read)"
+  }
+}
