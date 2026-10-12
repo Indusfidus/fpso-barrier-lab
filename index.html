@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FPSO Barrier Lab</title>
+  <meta name="description" content="Explore a generic deepwater FPSO in 3D and test whether its safety barriers are truly independent.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>FPSO Barrier Lab</h1>
+      <p>A generic deepwater FPSO. Click a module, then test its barriers.</p>
+    </div>
+    <p class="disclaimer">Educational tool by Frank Deezua Barilugbene. Public data and MSc work only. Not for design or operational decisions.</p>
+  </header>
+
+  <main class="layout">
+    <section class="viewport" aria-label="3D FPSO model">
+      <div id="scene"></div>
+      <div class="legend" aria-hidden="true">
+        <span><i class="sw oil"></i>Oil</span>
+        <span><i class="sw gas"></i>Gas</span>
+        <span><i class="sw water"></i>Water</span>
+        <span><i class="sw util"></i>Utilities</span>
+        <span><i class="sw life"></i>Accommodation</span>
+      </div>
+      <p class="hint">Drag to rotate. Scroll to zoom. Click a module to open it.</p>
+    </section>
+
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </main>
+
+  <noscript>This tool needs JavaScript to draw the 3D model and run the risk engine.</noscript>
+  <script type="module" src="app/main.js"></script>
+</body>
+</html>

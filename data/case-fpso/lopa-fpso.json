@@ -3,107 +3,371 @@
   "note": "Each scenario has an 'as found' design and a recommended fix. 'Naive' multiplies every claimed layer. 'Strict' applies independence and validity checks. All PFDs are generic CCPS-style values or PFDavg from the coursework data. ASSUMED values are marked.",
   "scenarios": [
     {
-      "id": "F1", "system": "SEP", "title": "HP separator gas blowby to LP separator",
+      "id": "F1",
+      "system": "SEP",
+      "title": "HP separator gas blowby to LP separator",
       "cause": "HP separator level control loop fails (LT-1 or LCV fails open). Liquid level is lost and gas flows into the LP separator.",
       "consequence": "LP separator (design 10 barg) overpressured by HP gas. Rupture, fire and explosion in the separation module.",
       "severity": "Catastrophic",
       "cases": [
         {
-          "id": "A", "label": "As found",
-          "initiatingEvent": { "description": "BPCS level loop failure", "frequency": 0.1, "sensor": "LT-1", "basis": "CCPS generic BPCS loop failure" },
+          "id": "A",
+          "label": "As found",
+          "initiatingEvent": {
+            "description": "BPCS level loop failure",
+            "frequency": 0.1,
+            "sensor": "LT-1",
+            "basis": "CCPS generic BPCS loop failure"
+          },
           "layers": [
-            { "id": "ALM", "name": "Low level alarm LAL + operator closes inlet", "kind": "human", "pfd": 0.1, "credited": true, "sensor": "LT-1", "responseTimeMin": 15, "note": "Alarm comes from the same transmitter as the control loop." },
-            { "id": "SIF", "name": "LSLL SIF closes liquid outlet SDV (SIL 1)", "kind": "sif", "pfd": 0.015, "credited": true, "sensor": "LT-2" },
-            { "id": "PSV", "name": "LP separator PSV", "kind": "relief", "pfd": 0.01, "credited": true, "sensor": null, "sizedForScenario": false, "note": "Sized for fire case only, not full gas blowby. A common real finding." }
+            {
+              "id": "ALM",
+              "name": "Low level alarm LAL + operator closes inlet",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": true,
+              "sensor": "LT-1",
+              "responseTimeMin": 15,
+              "note": "Alarm comes from the same transmitter as the control loop."
+            },
+            {
+              "id": "SIF",
+              "name": "LSLL SIF closes liquid outlet SDV (SIL 1)",
+              "kind": "sif",
+              "pfd": 0.015,
+              "credited": true,
+              "sensor": "LT-2"
+            },
+            {
+              "id": "PSV",
+              "name": "LP separator PSV",
+              "kind": "relief",
+              "pfd": 0.01,
+              "credited": true,
+              "sensor": null,
+              "sizedForScenario": false,
+              "note": "Sized for fire case only, not full gas blowby. A common real finding."
+            }
           ]
         },
         {
-          "id": "B", "label": "Fix",
-          "initiatingEvent": { "description": "BPCS level loop failure", "frequency": 0.1, "sensor": "LT-1", "basis": "CCPS generic BPCS loop failure" },
+          "id": "B",
+          "label": "Fix",
+          "initiatingEvent": {
+            "description": "BPCS level loop failure",
+            "frequency": 0.1,
+            "sensor": "LT-1",
+            "basis": "CCPS generic BPCS loop failure"
+          },
           "layers": [
-            { "id": "ALM", "name": "Low level alarm from independent LT-3 + operator", "kind": "human", "pfd": 0.1, "credited": true, "sensor": "LT-3", "responseTimeMin": 15 },
-            { "id": "SIF", "name": "LSLL SIF upgraded to SIL 2", "kind": "sif", "pfd": 0.005, "credited": true, "sensor": "LT-2" },
-            { "id": "PSV", "name": "LP separator PSV resized for full gas blowby", "kind": "relief", "pfd": 0.01, "credited": true, "sensor": null, "sizedForScenario": true }
+            {
+              "id": "ALM",
+              "name": "Low level alarm from independent LT-3 + operator",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": true,
+              "sensor": "LT-3",
+              "responseTimeMin": 15
+            },
+            {
+              "id": "SIF",
+              "name": "LSLL SIF upgraded to SIL 2",
+              "kind": "sif",
+              "pfd": 0.005,
+              "credited": true,
+              "sensor": "LT-2"
+            },
+            {
+              "id": "PSV",
+              "name": "LP separator PSV resized for full gas blowby",
+              "kind": "relief",
+              "pfd": 0.01,
+              "credited": true,
+              "sensor": null,
+              "sizedForScenario": true
+            }
           ]
         }
+      ],
+      "lessons": [
+        "The low level alarm comes from the same transmitter as the control loop that failed. It cannot protect against its own failure.",
+        "A PSV sized only for fire cannot be credited for gas blowby. Blowby needs a much larger relief rate.",
+        "The fix needs an independent transmitter, a SIL 2 trip and a resized PSV."
       ]
     },
     {
-      "id": "F2", "system": "INJ", "title": "Reinjection compressor discharge blocked",
+      "id": "F2",
+      "system": "INJ",
+      "title": "Reinjection compressor discharge blocked",
       "cause": "Injection riser ESD valve SDV-2701 closes spuriously while the compressor runs.",
       "consequence": "Discharge piping overpressured above 385 barg design. High-pressure gas release, jet fire and escalation.",
       "severity": "Catastrophic",
       "cases": [
         {
-          "id": "A", "label": "As found",
-          "initiatingEvent": { "description": "Spurious closure of SDV-2701", "frequency": 0.1, "sensor": null, "basis": "ASSUMED generic valve spurious closure" },
+          "id": "A",
+          "label": "As found",
+          "initiatingEvent": {
+            "description": "Spurious closure of SDV-2701",
+            "frequency": 0.1,
+            "sensor": null,
+            "basis": "ASSUMED generic valve spurious closure"
+          },
           "layers": [
-            { "id": "ALM", "name": "High pressure alarm PAH + operator trips compressor", "kind": "human", "pfd": 0.1, "credited": true, "sensor": "PT-1", "responseTimeMin": 1, "note": "Pressure rises to relief set point in about a minute. Too fast for an operator." },
-            { "id": "SIF", "name": "PSHH SIF trips compressor (SIL 2)", "kind": "sif", "pfd": 0.005, "credited": true, "sensor": "PT-2" },
-            { "id": "PSV", "name": "Discharge PSV", "kind": "relief", "pfd": 0.01, "credited": true, "sensor": null, "sizedForScenario": true }
+            {
+              "id": "ALM",
+              "name": "High pressure alarm PAH + operator trips compressor",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": true,
+              "sensor": "PT-1",
+              "responseTimeMin": 1,
+              "note": "Pressure rises to relief set point in about a minute. Too fast for an operator."
+            },
+            {
+              "id": "SIF",
+              "name": "PSHH SIF trips compressor (SIL 2)",
+              "kind": "sif",
+              "pfd": 0.005,
+              "credited": true,
+              "sensor": "PT-2"
+            },
+            {
+              "id": "PSV",
+              "name": "Discharge PSV",
+              "kind": "relief",
+              "pfd": 0.01,
+              "credited": true,
+              "sensor": null,
+              "sizedForScenario": true
+            }
           ]
         },
         {
-          "id": "B", "label": "Fix",
-          "initiatingEvent": { "description": "Spurious closure of SDV-2701", "frequency": 0.1, "sensor": null, "basis": "ASSUMED generic valve spurious closure" },
+          "id": "B",
+          "label": "Fix",
+          "initiatingEvent": {
+            "description": "Spurious closure of SDV-2701",
+            "frequency": 0.1,
+            "sensor": null,
+            "basis": "ASSUMED generic valve spurious closure"
+          },
           "layers": [
-            { "id": "ALM", "name": "PAH kept as an operator aid, not credited", "kind": "human", "pfd": 0.1, "credited": false, "sensor": "PT-1", "responseTimeMin": 1 },
-            { "id": "SIF", "name": "SIL 3 high-integrity trip, 2oo3 transmitters", "kind": "sif", "pfd": 0.0005, "credited": true, "sensor": "PT-2/3/4" },
-            { "id": "PSV", "name": "Discharge PSV", "kind": "relief", "pfd": 0.01, "credited": true, "sensor": null, "sizedForScenario": true }
+            {
+              "id": "ALM",
+              "name": "PAH kept as an operator aid, not credited",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": false,
+              "sensor": "PT-1",
+              "responseTimeMin": 1
+            },
+            {
+              "id": "SIF",
+              "name": "SIL 3 high-integrity trip, 2oo3 transmitters",
+              "kind": "sif",
+              "pfd": 0.0005,
+              "credited": true,
+              "sensor": "PT-2/3/4"
+            },
+            {
+              "id": "PSV",
+              "name": "Discharge PSV",
+              "kind": "relief",
+              "pfd": 0.01,
+              "credited": true,
+              "sensor": null,
+              "sizedForScenario": true
+            }
           ]
         }
+      ],
+      "lessons": [
+        "Discharge pressure reaches the relief set point in about a minute. An operator cannot respond in time, so the alarm earns no credit.",
+        "Naive LOPA passes. Strict LOPA fails by 5×.",
+        "The fix is a SIL 3 high-integrity trip with 2oo3 voting, plus the PSV. Keep the alarm as an aid."
       ]
     },
     {
-      "id": "F3", "system": "TEG", "title": "TEG regenerator overpressure (from coursework LOPA-01)",
+      "id": "F3",
+      "system": "TEG",
+      "title": "TEG regenerator overpressure (from coursework LOPA-01)",
       "cause": "Loss of reflux condenser cooling or blocked still vent while the reboiler fires.",
       "consequence": "Regenerator C-2402 overpressured. Release of hot TEG and hydrocarbon vapour, fire in the dehydration module.",
       "severity": "Major",
       "cases": [
         {
-          "id": "A", "label": "As found",
-          "initiatingEvent": { "description": "Loss of overhead cooling or blocked vent", "frequency": 0.1, "sensor": null, "basis": "CCPS generic loss of cooling" },
+          "id": "A",
+          "label": "As found",
+          "initiatingEvent": {
+            "description": "Loss of overhead cooling or blocked vent",
+            "frequency": 0.1,
+            "sensor": null,
+            "basis": "CCPS generic loss of cooling"
+          },
           "layers": [
-            { "id": "ALM", "name": "High pressure alarm PAH + operator", "kind": "human", "pfd": 0.1, "credited": true, "sensor": "PT-1", "responseTimeMin": 20 },
-            { "id": "SIF", "name": "PSHH cuts hot oil to reboiler (SIL 1)", "kind": "sif", "pfd": 0.015, "credited": true, "sensor": "PT-1", "note": "Same transmitter as the alarm." },
-            { "id": "PSV", "name": "Regenerator PSV", "kind": "relief", "pfd": 0.01, "credited": true, "sensor": null, "sizedForScenario": true }
+            {
+              "id": "ALM",
+              "name": "High pressure alarm PAH + operator",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": true,
+              "sensor": "PT-1",
+              "responseTimeMin": 20
+            },
+            {
+              "id": "SIF",
+              "name": "PSHH cuts hot oil to reboiler (SIL 1)",
+              "kind": "sif",
+              "pfd": 0.015,
+              "credited": true,
+              "sensor": "PT-1",
+              "note": "Same transmitter as the alarm."
+            },
+            {
+              "id": "PSV",
+              "name": "Regenerator PSV",
+              "kind": "relief",
+              "pfd": 0.01,
+              "credited": true,
+              "sensor": null,
+              "sizedForScenario": true
+            }
           ]
         },
         {
-          "id": "B", "label": "Fix",
-          "initiatingEvent": { "description": "Loss of overhead cooling or blocked vent", "frequency": 0.1, "sensor": null, "basis": "CCPS generic loss of cooling" },
+          "id": "B",
+          "label": "Fix",
+          "initiatingEvent": {
+            "description": "Loss of overhead cooling or blocked vent",
+            "frequency": 0.1,
+            "sensor": null,
+            "basis": "CCPS generic loss of cooling"
+          },
           "layers": [
-            { "id": "ALM", "name": "High pressure alarm PAH + operator", "kind": "human", "pfd": 0.1, "credited": true, "sensor": "PT-1", "responseTimeMin": 20 },
-            { "id": "SIF", "name": "PSHH on dedicated PT-2 (SIL 1)", "kind": "sif", "pfd": 0.015, "credited": true, "sensor": "PT-2" },
-            { "id": "PSV", "name": "Regenerator PSV", "kind": "relief", "pfd": 0.01, "credited": true, "sensor": null, "sizedForScenario": true }
+            {
+              "id": "ALM",
+              "name": "High pressure alarm PAH + operator",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": true,
+              "sensor": "PT-1",
+              "responseTimeMin": 20
+            },
+            {
+              "id": "SIF",
+              "name": "PSHH on dedicated PT-2 (SIL 1)",
+              "kind": "sif",
+              "pfd": 0.015,
+              "credited": true,
+              "sensor": "PT-2"
+            },
+            {
+              "id": "PSV",
+              "name": "Regenerator PSV",
+              "kind": "relief",
+              "pfd": 0.01,
+              "credited": true,
+              "sensor": null,
+              "sizedForScenario": true
+            }
           ]
         }
+      ],
+      "lessons": [
+        "Your coursework scenario moved onto the FPSO. Same mechanism, but the consequence is a fire, not toxic H2S, so the target is 1 × 10⁻⁵.",
+        "The alarm and trip share PT-1. Naive LOPA passes. Strict LOPA fails by 1.5×.",
+        "The fix is cheap: a dedicated transmitter for the trip."
       ]
     },
     {
-      "id": "F4", "system": "CT", "title": "Cargo tank overfill (Buncefield analogue)",
+      "id": "F4",
+      "system": "CT",
+      "title": "Cargo tank overfill (Buncefield analogue)",
       "cause": "Radar level gauge RLG-1 sticks, or wrong tank lineup during changeover.",
       "consequence": "Crude overflows through P/V valves onto the main deck. Pool fire, vapour cloud, oil to sea.",
       "severity": "Major",
       "cases": [
         {
-          "id": "A", "label": "As found",
-          "initiatingEvent": { "description": "Gauge failure or lineup error", "frequency": 0.1, "sensor": "RLG-1", "basis": "ASSUMED generic" },
+          "id": "A",
+          "label": "As found",
+          "initiatingEvent": {
+            "description": "Gauge failure or lineup error",
+            "frequency": 0.1,
+            "sensor": "RLG-1",
+            "basis": "ASSUMED generic"
+          },
           "layers": [
-            { "id": "HLA", "name": "High level alarm from the radar gauge", "kind": "human", "pfd": 0.1, "credited": true, "sensor": "RLG-1", "responseTimeMin": 30 },
-            { "id": "HHA", "name": "High-high level alarm from switch LS-2", "kind": "human", "pfd": 0.1, "credited": true, "sensor": "LS-2", "responseTimeMin": 15 },
-            { "id": "SIF", "name": "Overfill trip closes tank inlet (SIL 1)", "kind": "sif", "pfd": 0.015, "credited": true, "sensor": "LS-2", "note": "Same switch as the high-high alarm. At Buncefield the independent switch was inoperable." }
+            {
+              "id": "HLA",
+              "name": "High level alarm from the radar gauge",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": true,
+              "sensor": "RLG-1",
+              "responseTimeMin": 30
+            },
+            {
+              "id": "HHA",
+              "name": "High-high level alarm from switch LS-2",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": true,
+              "sensor": "LS-2",
+              "responseTimeMin": 15
+            },
+            {
+              "id": "SIF",
+              "name": "Overfill trip closes tank inlet (SIL 1)",
+              "kind": "sif",
+              "pfd": 0.015,
+              "credited": true,
+              "sensor": "LS-2",
+              "note": "Same switch as the high-high alarm. At Buncefield the independent switch was inoperable."
+            }
           ]
         },
         {
-          "id": "B", "label": "Fix",
-          "initiatingEvent": { "description": "Gauge failure or lineup error", "frequency": 0.1, "sensor": "RLG-1", "basis": "ASSUMED generic" },
+          "id": "B",
+          "label": "Fix",
+          "initiatingEvent": {
+            "description": "Gauge failure or lineup error",
+            "frequency": 0.1,
+            "sensor": "RLG-1",
+            "basis": "ASSUMED generic"
+          },
           "layers": [
-            { "id": "HHA", "name": "High-high alarm from independent switch LS-3", "kind": "human", "pfd": 0.1, "credited": true, "sensor": "LS-3", "responseTimeMin": 15 },
-            { "id": "SIF", "name": "Overfill trip on LS-2 upgraded to SIL 2", "kind": "sif", "pfd": 0.005, "credited": true, "sensor": "LS-2" },
-            { "id": "OVF", "name": "Overflow line to slop tank (passive)", "kind": "passive", "pfd": 0.01, "credited": true, "sensor": null }
+            {
+              "id": "HHA",
+              "name": "High-high alarm from independent switch LS-3",
+              "kind": "human",
+              "pfd": 0.1,
+              "credited": true,
+              "sensor": "LS-3",
+              "responseTimeMin": 15
+            },
+            {
+              "id": "SIF",
+              "name": "Overfill trip on LS-2 upgraded to SIL 2",
+              "kind": "sif",
+              "pfd": 0.005,
+              "credited": true,
+              "sensor": "LS-2"
+            },
+            {
+              "id": "OVF",
+              "name": "Overflow line to slop tank (passive)",
+              "kind": "passive",
+              "pfd": 0.01,
+              "credited": true,
+              "sensor": null
+            }
           ]
         }
+      ],
+      "lessons": [
+        "The high level alarm uses the same radar gauge that failed. At Buncefield the gauge stuck and the independent switch was inoperable.",
+        "The high-high alarm and the trip share switch LS-2, so only one counts.",
+        "The fix needs an independent switch, a SIL 2 trip and a passive overflow line to the slop tank."
       ]
     }
   ]

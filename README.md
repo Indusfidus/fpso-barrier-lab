@@ -1,5 +1,7 @@
 # FPSO Barrier Lab
 
+Live tool: https://indusfidus.github.io/fpso-barrier-lab/
+
 An educational 3D process safety and risk tool for a generic West Africa deepwater FPSO.
 Built by Frank Deezua Barilugbene (MSc Process Safety Engineering, University of Aberdeen).
 
@@ -26,3 +28,11 @@ MIT. See `LICENSE`.
 - `data/case-fpso/lopa-fpso.json` – four LOPA scenarios (separator blowby, reinjection compressor, TEG regenerator, cargo tank overfill)
 - `docs/fpso-scenario.md` and `docs/fpso-pfd.svg` – scenario write-up and block flow diagram
 - `node scripts/verify-fpso.mjs` – naive vs strict LOPA with independence checks
+
+## The 3D tool
+
+- `index.html` and `app/` – Three.js model of the FPSO and the LOPA lab. No build step.
+- Click a module to see its equipment, hazards, permit tasks and barrier scenarios.
+- In a scenario, change a sensor, PFD, response time or relief sizing and watch the verdict move.
+
+Run it locally: `python3 -m http.server` in this folder, then open http://localhost:8000.
