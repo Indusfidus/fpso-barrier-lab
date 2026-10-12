@@ -1,0 +1,73 @@
+{
+  "id": "LOPA-01",
+  "caseId": "gas-sweetening",
+  "module": "gas-treatment",
+  "scenario": "Overpressure of amine regenerator C-4402 leading to toxic H2S release",
+  "consequence": "Major toxic H2S release to atmosphere. Multiple fatalities possible, facility evacuation, major environmental incident.",
+  "severity": "Catastrophic",
+  "tolerableFrequency": 1e-6,
+  "tolerableBasis": "Scenario target for a multiple-fatality event, as set in the coursework. Note: UK HSE R2P2 1e-6/yr is a broadly acceptable INDIVIDUAL risk level, not a scenario frequency. Company scenario targets usually sit between 1e-5 and 1e-6 per year.",
+  "cases": [
+    {
+      "id": "A",
+      "label": "Coursework as submitted",
+      "initiatingEvent": { "description": "Total failure of reflux condenser EA-4402", "frequency": 3.0e-3, "basis": "Condenser equipment failure rate from safety data table" },
+      "enablingProbability": 1,
+      "layers": [
+        { "id": "BPCS", "name": "BPCS pressure control",                     "pfd": 1,       "credited": false, "sensor": "PT-1", "note": "No credit. The BPCS cannot be both the cause path and a layer." },
+        { "id": "ALM",  "name": "High pressure alarm + operator response (PAH)", "pfd": 5.82e-2, "credited": true,  "sensor": "PT-1", "note": "Used the pressure transmitter failure rate. Human response not included." },
+        { "id": "TRIP", "name": "High-high pressure trip (PSHH) to ESD",      "pfd": 2.96e-2, "credited": true,  "sensor": "PT-2", "note": "Labelled 'High-High Level Trip' in the coursework. Data is the pressure trip." },
+        { "id": "PSV",  "name": "PSV on C-4402",                              "pfd": 2.36e-3, "credited": true,  "sensor": null }
+      ]
+    },
+    {
+      "id": "B",
+      "label": "Corrected credits, same initiating event",
+      "initiatingEvent": { "description": "Total failure of reflux condenser EA-4402", "frequency": 3.0e-3, "basis": "Condenser equipment failure rate from safety data table" },
+      "enablingProbability": 1,
+      "layers": [
+        { "id": "BPCS", "name": "BPCS pressure control",                     "pfd": 1,     "credited": false, "sensor": "PT-1" },
+        { "id": "ALM",  "name": "High pressure alarm + operator response (PAH)", "pfd": 0.1,   "credited": true,  "sensor": "PT-1", "note": "CCPS maximum credit for alarm with operator response." },
+        { "id": "TRIP", "name": "High-high pressure trip (PSHH) to ESD",      "pfd": 0.015, "credited": true,  "sensor": "PT-2", "note": "PFDavg = 3.0e-2 x 1 yr / 2." },
+        { "id": "PSV",  "name": "PSV on C-4402",                              "pfd": 0.01,  "credited": true,  "sensor": null, "note": "CCPS generic PSV credit." }
+      ]
+    },
+    {
+      "id": "C",
+      "label": "Realistic initiating event: loss of cooling",
+      "initiatingEvent": { "description": "Loss of reflux cooling (fan trip, power loss, fouling, control failure)", "frequency": 0.1, "basis": "Typical generic frequency for loss of cooling or a BPCS loop failure (CCPS LOPA guidance)" },
+      "enablingProbability": 1,
+      "layers": [
+        { "id": "BPCS", "name": "BPCS pressure control",                     "pfd": 1,     "credited": false, "sensor": "PT-1" },
+        { "id": "ALM",  "name": "High pressure alarm + operator response (PAH)", "pfd": 0.1,   "credited": true,  "sensor": "PT-1" },
+        { "id": "TRIP", "name": "High-high pressure trip (PSHH) to ESD",      "pfd": 0.015, "credited": true,  "sensor": "PT-2" },
+        { "id": "PSV",  "name": "PSV on C-4402",                              "pfd": 0.01,  "credited": true,  "sensor": null }
+      ]
+    },
+    {
+      "id": "D",
+      "label": "Alarm and trip share one transmitter",
+      "initiatingEvent": { "description": "Loss of reflux cooling", "frequency": 0.1, "basis": "As case C" },
+      "enablingProbability": 1,
+      "layers": [
+        { "id": "BPCS", "name": "BPCS pressure control",                     "pfd": 1,     "credited": false, "sensor": "PT-1" },
+        { "id": "ALM",  "name": "High pressure alarm + operator response (PAH)", "pfd": 0.1,   "credited": true,  "sensor": "PT-1" },
+        { "id": "TRIP", "name": "High-high pressure trip (PSHH) to ESD",      "pfd": 0.015, "credited": true,  "sensor": "PT-1", "note": "Same transmitter as the alarm. Not independent." },
+        { "id": "PSV",  "name": "PSV on C-4402",                              "pfd": 0.01,  "credited": true,  "sensor": null }
+      ]
+    },
+    {
+      "id": "E",
+      "label": "Fix: separate transmitter and SIL 2 trip",
+      "initiatingEvent": { "description": "Loss of reflux cooling", "frequency": 0.1, "basis": "As case C" },
+      "enablingProbability": 1,
+      "layers": [
+        { "id": "BPCS", "name": "BPCS pressure control",                     "pfd": 1,     "credited": false, "sensor": "PT-1" },
+        { "id": "ALM",  "name": "High pressure alarm + operator response (PAH)", "pfd": 0.1,   "credited": true,  "sensor": "PT-1" },
+        { "id": "TRIP", "name": "SIL 2 high-high pressure trip (dedicated PT-2)", "pfd": 0.005, "credited": true, "sensor": "PT-2", "note": "SIL 2 band is 0.01 to 0.001. 0.005 is a mid-band design target, to be verified." },
+        { "id": "PSV",  "name": "PSV on C-4402",                              "pfd": 0.01,  "credited": true,  "sensor": null }
+      ]
+    }
+  ],
+  "independenceRule": "Layers sharing a sensor, logic solver or final element form a dependent group. Default (CCPS strict): credit only the best layer in the group. Optional beta-factor mode: group PFD = (1 - beta) x product + beta x min."
+}

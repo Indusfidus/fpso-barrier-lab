@@ -1,0 +1,27 @@
+{
+  "id": "ET-01",
+  "caseId": "gas-sweetening",
+  "initiatingEvent": { "label": "Sour gas leak from amine absorber C-4401", "frequency": 2.63e-2, "basis": "Vessel failure rate, all modes (conservative)" },
+  "courseworkIssues": [
+    "Gas detection PFD 0.00317 was 10x too low. Corrected PFDavg = 0.0322/2 = 0.0161.",
+    "The 'No ignition' branch (0.70) led to a vapour cloud explosion. No ignition cannot give an explosion. A VCE needs delayed ignition in a congested area.",
+    "PSV and flare branches belong to an overpressure tree. A PSV does not stop a leak. For a leak the sequence is detect, isolate, then ignition.",
+    "'Loss of containment' was listed as an outcome. It is the initiating event. Outcomes are jet fire, flash fire, VCE, toxic cloud or safe dispersal.",
+    "No toxic outcome despite sour gas containing H2S."
+  ],
+  "branches": [
+    { "id": "GD",  "label": "Gas detection works",                 "failProbability": 0.0161, "basis": "PFDavg = 3.22e-2 x 1 yr / 2" },
+    { "id": "ESD", "label": "ESD isolation works",                 "failProbability": 0.00158, "basis": "PFDavg = 3.16e-3 x 1 yr / 2" },
+    { "id": "IMM", "label": "Immediate ignition",                  "probability": 0.10, "basis": "ASSUMED. Replace with release-rate based value." },
+    { "id": "DEL", "label": "Delayed ignition (given no immediate)", "probability": 0.30, "basis": "Coursework ignition value (0.30) reused for delayed ignition. ASSUMED." },
+    { "id": "CNG", "label": "Cloud reaches congested area",         "probability": 0.50, "basis": "ASSUMED. Depends on module layout." }
+  ],
+  "outcomes": [
+    { "id": "O1", "label": "Detected and isolated: limited release", "path": ["GD:success", "ESD:success"] },
+    { "id": "O2", "label": "Jet fire",                     "path": ["ISOLATION:fail", "IMM:yes"] },
+    { "id": "O3", "label": "Vapour cloud explosion",       "path": ["ISOLATION:fail", "IMM:no", "DEL:yes", "CNG:yes"] },
+    { "id": "O4", "label": "Flash fire",                   "path": ["ISOLATION:fail", "IMM:no", "DEL:yes", "CNG:no"] },
+    { "id": "O5", "label": "Toxic H2S cloud",              "path": ["ISOLATION:fail", "IMM:no", "DEL:no"] }
+  ],
+  "isolationLogic": "Isolation fails if gas detection fails OR ESD fails: P = 1 - (1 - P_GD)(1 - P_ESD)."
+}

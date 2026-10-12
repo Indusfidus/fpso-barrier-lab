@@ -1,0 +1,28 @@
+{
+  "id": "FT-01",
+  "caseId": "gas-sweetening",
+  "topEvent": "Fire or explosion from a flammable release in the amine regeneration area",
+  "courseworkTopEvent": "Vapour cloud explosion at regeneration unit (P13 = 1.413e-2, no unit)",
+  "method": "Leak branches are FREQUENCIES (per year) and combine by summing (rare-event OR). Ignition is a PROBABILITY and combines by 1 - product(1 - p). The AND gate multiplies a frequency by a probability, giving a frequency per year.",
+  "nodes": [
+    { "id": "TOP",  "gate": "AND", "label": "Ignited flammable release, regeneration area", "children": ["G12", "G11"], "output": "frequency" },
+    { "id": "G12",  "gate": "OR",  "label": "Flammable gas release", "children": ["G9", "G10"], "output": "frequency" },
+    { "id": "G9",   "gate": "OR",  "label": "Leak from rich amine section", "children": ["P1", "P2"], "output": "frequency" },
+    { "id": "G10",  "gate": "OR",  "label": "Leak from regeneration section", "children": ["P3", "P4", "P5"], "output": "frequency" },
+    { "id": "G11",  "gate": "OR",  "label": "Ignition source present", "children": ["P6", "P7", "P8"], "output": "probability" },
+    { "id": "P1", "basic": true, "label": "Leak from rich/lean exchanger E-4404A/B/C", "kind": "frequency", "value": 5.0e-2, "component": "HX" },
+    { "id": "P2", "basic": true, "label": "Leak from rich amine flash drum V-4404",    "kind": "frequency", "value": 2.0e-2, "component": "FLD" },
+    { "id": "P3", "basic": true, "label": "Leak from amine regenerator C-4402",       "kind": "frequency", "value": 2.63e-2, "component": "VES" },
+    { "id": "P4", "basic": true, "label": "Leak from reflux drum V-4406",             "kind": "frequency", "value": 2.0e-2, "component": "RFD" },
+    { "id": "P5", "basic": true, "label": "Leak from reflux condenser EA-4402",       "kind": "frequency", "value": 3.0e-3, "component": "RFC" },
+    { "id": "P6", "basic": true, "label": "Ignition at reboiler E-4406A/B",           "kind": "probability", "value": 0.0392, "flag": "Coursework proxy: reboiler annual failure probability. Replace with an ignition model (e.g. UKOOA/IP look-up by release rate)." },
+    { "id": "P7", "basic": true, "label": "Spark at amine circulation pump P-4402A/B", "kind": "probability", "value": 0.0429, "flag": "Coursework proxy: pump annual failure probability." },
+    { "id": "P8", "basic": true, "label": "Spark at reflux pump P-4405A/B",           "kind": "probability", "value": 0.0429, "flag": "Coursework proxy: pump annual failure probability." }
+  ],
+  "corrections": [
+    "Coursework P10 subtracted P6xP7xP8 (ignition terms) instead of combining P3, P4, P5.",
+    "Coursework OR gates on three inputs used P_a + P_b + P_c - P_a x P_b x P_c, which drops the pairwise terms. Correct: 1 - (1 - P_a)(1 - P_b)(1 - P_c).",
+    "Coursework multiplied leak probabilities by ignition probability and reported a unitless 1.4e-2. Leaks are frequencies, so the top event is a frequency per year.",
+    "A VCE needs delayed ignition AND congestion. This tree gives any ignited release. The VCE share is split out in the event tree."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "BT-01",
+  "caseId": "gas-sweetening",
+  "hazard": "Acid gas (H2S, CO2) and hot amine in amine regenerator C-4402",
+  "topEvent": "Loss of containment from amine regenerator C-4402",
+  "barrierTypes": {
+    "passive-hardware": "Works without activation: design pressure, bunds, fireproofing, blast walls, drains",
+    "active-hardware": "Detect, decide, act automatically: PSV, SIS trip, ESD, deluge",
+    "active-human": "A person detects and acts: alarm with operator response",
+    "procedural": "Supports other barriers: inspection, procedures, training. Not a barrier on its own."
+  },
+  "threats": [
+    { "id": "T1", "label": "Loss of reflux cooling (EA-4402)", "barriers": [
+      { "label": "High pressure alarm PAH + operator response", "type": "active-human", "owner": "Control room operator" },
+      { "label": "High-high pressure trip PSHH, cuts hot oil to reboilers", "type": "active-hardware", "owner": "Instrument engineer" },
+      { "label": "PSV on C-4402 to flare", "type": "active-hardware", "owner": "Mechanical integrity team" } ] },
+    { "id": "T2", "label": "Reboiler overheating (E-4406A/B)", "barriers": [
+      { "label": "High temperature alarm TAH + operator response", "type": "active-human", "owner": "Control room operator" },
+      { "label": "High-high temperature trip TSHH, cuts hot oil", "type": "active-hardware", "owner": "Instrument engineer" },
+      { "label": "PSV on C-4402 to flare", "type": "active-hardware", "owner": "Mechanical integrity team" } ] },
+    { "id": "T3", "label": "Loss of reflux due to level control failure on V-4406", "barriers": [
+      { "label": "Low level alarm LAL + operator response", "type": "active-human", "owner": "Control room operator" },
+      { "label": "Low-low level trip LSLL, trips reflux pumps P-4405A/B", "type": "active-hardware", "owner": "Instrument engineer" } ] },
+    { "id": "T4", "label": "Internal corrosion of vessel wall", "barriers": [
+      { "label": "Corrosion allowance and material selection", "type": "passive-hardware", "owner": "Materials engineer" },
+      { "label": "Risk-based inspection programme", "type": "procedural", "owner": "Inspection engineer" },
+      { "label": "Amine quality monitoring (heat stable salts)", "type": "procedural", "owner": "Process chemist" } ] }
+  ],
+  "consequences": [
+    { "id": "C1", "label": "Toxic H2S cloud", "barriers": [
+      { "label": "Fixed H2S detection with alarm", "type": "active-hardware", "owner": "Instrument engineer" },
+      { "label": "ESD isolation and depressurisation", "type": "active-hardware", "owner": "Instrument engineer" },
+      { "label": "Muster upwind, breathing apparatus, temporary refuge", "type": "active-human", "owner": "Offshore installation manager" } ] },
+    { "id": "C2", "label": "Jet fire", "barriers": [
+      { "label": "Flame detection with ESD", "type": "active-hardware", "owner": "Instrument engineer" },
+      { "label": "Passive fireproofing on supports", "type": "passive-hardware", "owner": "Structural engineer" },
+      { "label": "Deluge system", "type": "active-hardware", "owner": "Fire and safety engineer" } ] },
+    { "id": "C3", "label": "Vapour cloud explosion", "barriers": [
+      { "label": "Gas detection with ESD and ignition source isolation", "type": "active-hardware", "owner": "Instrument engineer" },
+      { "label": "Blast walls and low-congestion layout", "type": "passive-hardware", "owner": "Layout engineer" } ] }
+  ],
+  "removed": [
+    { "label": "BLEVE", "reason": "Regenerator runs at low pressure with aqueous amine. A BLEVE needs a pressurised liquid well above its boiling point. Not credible without justification." }
+  ],
+  "escalationFactors": [
+    { "factor": "Inspection or corrosion monitoring delayed or skipped", "affects": "T4 barriers", "control": "Inspection backlog tracked as a leading KPI (API 754 Tier 4)" },
+    { "factor": "Loss of power to instrumented trips and alarms", "affects": "T1, T2, T3 trips", "control": "UPS on SIS, fail-safe trip design" },
+    { "factor": "Emergency cooling supply unavailable", "affects": "T1", "control": "Cooling system included in the critical equipment list" }
+  ],
+  "reclassified": "Coursework listed alarm systems, manual shutdown procedures and muster points as passive barriers. Alarms are active-human. Procedures are procedural. Muster is a mitigation (emergency response) measure."
+}

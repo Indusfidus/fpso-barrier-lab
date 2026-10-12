@@ -1,0 +1,796 @@
+{
+  "components": [
+    {
+      "id": "LC",
+      "name": "Level controller",
+      "type": "bpcs",
+      "lambda": 0.0553,
+      "courseworkPfd": 0.0538,
+      "annualProbability": 0.053798755003329424,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "FC",
+      "name": "Flow controller",
+      "type": "bpcs",
+      "lambda": 0.0702,
+      "courseworkPfd": 0.0678,
+      "annualProbability": 0.06779264021139975,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "LCV",
+      "name": "Level control valve",
+      "type": "bpcs",
+      "lambda": 0.015,
+      "courseworkPfd": null,
+      "annualProbability": 0.014888060396937353,
+      "pfdAvg": null
+    },
+    {
+      "id": "VES",
+      "name": "Vessel failure (C-4401/C-4402)",
+      "type": "equipment",
+      "lambda": 0.0263,
+      "courseworkPfd": 0.026,
+      "annualProbability": 0.025957167077438448,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "FLT",
+      "name": "Feed gas filter coalescer V-4402",
+      "type": "equipment",
+      "lambda": 0.00762,
+      "courseworkPfd": 0.00756,
+      "annualProbability": 0.007591041401523668,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "GD",
+      "name": "Gas detection system",
+      "type": "protective",
+      "lambda": 0.0322,
+      "courseworkPfd": 0.00317,
+      "annualProbability": 0.03168709986837792,
+      "pfdAvg": 0.0161,
+      "courseworkMatches": false
+    },
+    {
+      "id": "ESD",
+      "name": "Emergency shutdown system",
+      "type": "protective",
+      "lambda": 0.00316,
+      "courseworkPfd": 0.00315,
+      "annualProbability": 0.0031550124549306613,
+      "pfdAvg": 0.00158,
+      "courseworkMatches": true
+    },
+    {
+      "id": "FLR",
+      "name": "Flare stack",
+      "type": "protective",
+      "lambda": 0.01,
+      "courseworkPfd": 0.00995,
+      "annualProbability": 0.009950166250831893,
+      "pfdAvg": 0.005,
+      "courseworkMatches": true
+    },
+    {
+      "id": "PSV",
+      "name": "Pressure safety valve",
+      "type": "protective",
+      "lambda": 0.00236,
+      "courseworkPfd": 0.00236,
+      "annualProbability": 0.0023572173894174098,
+      "pfdAvg": 0.00118,
+      "courseworkMatches": true
+    },
+    {
+      "id": "TC",
+      "name": "Trim cooler",
+      "type": "equipment",
+      "lambda": 0.00175,
+      "courseworkPfd": 0.00175,
+      "annualProbability": 0.0017484696428384794,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "AC",
+      "name": "Air cooler",
+      "type": "equipment",
+      "lambda": 0.00175,
+      "courseworkPfd": 0.00175,
+      "annualProbability": 0.0017484696428384794,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "PMP",
+      "name": "Pumps",
+      "type": "equipment",
+      "lambda": 0.0438,
+      "courseworkPfd": 0.0429,
+      "annualProbability": 0.04285463259510358,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "KOD",
+      "name": "Knockout drum",
+      "type": "equipment",
+      "lambda": 0.0043,
+      "courseworkPfd": 0.0043,
+      "annualProbability": 0.004290768236933862,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "RFD",
+      "name": "Reflux drum V-4406",
+      "type": "equipment",
+      "lambda": 0.02,
+      "courseworkPfd": 0.0198,
+      "annualProbability": 0.019801326693244747,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "FLD",
+      "name": "Rich amine flash drum V-4404",
+      "type": "equipment",
+      "lambda": 0.02,
+      "courseworkPfd": 0.0198,
+      "annualProbability": 0.019801326693244747,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "RBL",
+      "name": "Reboiler E-4406A/B",
+      "type": "equipment",
+      "lambda": 0.04,
+      "courseworkPfd": 0.0392,
+      "annualProbability": 0.03921056084767682,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "FIL",
+      "name": "Filter",
+      "type": "equipment",
+      "lambda": 0.0175,
+      "courseworkPfd": 0.01734,
+      "annualProbability": 0.017347764334926796,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "RFC",
+      "name": "Reflux condenser EA-4402",
+      "type": "equipment",
+      "lambda": 0.003,
+      "courseworkPfd": 0.002995,
+      "annualProbability": 0.0029955044966269995,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    },
+    {
+      "id": "HPT",
+      "name": "High pressure trip (PSHH)",
+      "type": "protective",
+      "lambda": 0.03,
+      "courseworkPfd": 0.0296,
+      "annualProbability": 0.029554466451491845,
+      "pfdAvg": 0.015,
+      "courseworkMatches": true
+    },
+    {
+      "id": "PT",
+      "name": "Pressure transmitter",
+      "type": "protective",
+      "lambda": 0.06,
+      "courseworkPfd": 0.0582,
+      "annualProbability": 0.05823546641575128,
+      "pfdAvg": 0.03,
+      "courseworkMatches": true
+    },
+    {
+      "id": "HX",
+      "name": "Rich/lean heat exchanger E-4404A/B/C",
+      "type": "equipment",
+      "lambda": 0.05,
+      "courseworkPfd": 0.0488,
+      "annualProbability": 0.048770575499285984,
+      "pfdAvg": null,
+      "courseworkMatches": true
+    }
+  ],
+  "lopa": {
+    "A": {
+      "label": "Coursework as submitted",
+      "ie": 0.003,
+      "strict": {
+        "unmitigated": 0.003,
+        "mitigated": 1.2196857600000003e-8,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.012196857600000003,
+        "margin": 81.98833115834687,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.0582
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.0296
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.00236
+          }
+        ]
+      },
+      "naive": {
+        "unmitigated": 0.003,
+        "mitigated": 1.2196857600000003e-8,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.012196857600000003,
+        "margin": 81.98833115834687,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.0582
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.0296
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.00236
+          }
+        ]
+      },
+      "beta10": {
+        "unmitigated": 0.003,
+        "mitigated": 1.2196857600000003e-8,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.012196857600000003,
+        "margin": 81.98833115834687,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.0582
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.0296
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.00236
+          }
+        ]
+      }
+    },
+    "B": {
+      "label": "Corrected credits, same initiating event",
+      "ie": 0.003,
+      "strict": {
+        "unmitigated": 0.003,
+        "mitigated": 4.5e-8,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.045,
+        "margin": 22.22222222222222,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.015
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      },
+      "naive": {
+        "unmitigated": 0.003,
+        "mitigated": 4.5e-8,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.045,
+        "margin": 22.22222222222222,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.015
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      },
+      "beta10": {
+        "unmitigated": 0.003,
+        "mitigated": 4.5e-8,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.045,
+        "margin": 22.22222222222222,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.015
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      }
+    },
+    "C": {
+      "label": "Realistic initiating event: loss of cooling",
+      "ie": 0.1,
+      "strict": {
+        "unmitigated": 0.1,
+        "mitigated": 0.0000015,
+        "tolerable": 0.000001,
+        "meets": false,
+        "gapFactor": 1.5,
+        "margin": null,
+        "requiredExtraPfd": 0.6666666666666666,
+        "requiredSil": "No SIL (PFD >= 0.1)",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.015
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      },
+      "naive": {
+        "unmitigated": 0.1,
+        "mitigated": 0.0000015,
+        "tolerable": 0.000001,
+        "meets": false,
+        "gapFactor": 1.5,
+        "margin": null,
+        "requiredExtraPfd": 0.6666666666666666,
+        "requiredSil": "No SIL (PFD >= 0.1)",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.015
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      },
+      "beta10": {
+        "unmitigated": 0.1,
+        "mitigated": 0.0000015,
+        "tolerable": 0.000001,
+        "meets": false,
+        "gapFactor": 1.5,
+        "margin": null,
+        "requiredExtraPfd": 0.6666666666666666,
+        "requiredSil": "No SIL (PFD >= 0.1)",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.015
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      }
+    },
+    "D": {
+      "label": "Alarm and trip share one transmitter",
+      "ie": 0.1,
+      "strict": {
+        "unmitigated": 0.1,
+        "mitigated": 0.000014999999999999999,
+        "tolerable": 0.000001,
+        "meets": false,
+        "gapFactor": 15,
+        "margin": null,
+        "requiredExtraPfd": 0.06666666666666667,
+        "requiredSil": "SIL 1",
+        "groups": [
+          {
+            "layers": [
+              "ALM",
+              "TRIP"
+            ],
+            "dependent": true,
+            "pfd": 0.015
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      },
+      "naive": {
+        "unmitigated": 0.1,
+        "mitigated": 0.0000015,
+        "tolerable": 0.000001,
+        "meets": false,
+        "gapFactor": 1.5,
+        "margin": null,
+        "requiredExtraPfd": 0.6666666666666666,
+        "requiredSil": "No SIL (PFD >= 0.1)",
+        "groups": [
+          {
+            "layers": [
+              "ALM",
+              "TRIP"
+            ],
+            "dependent": true,
+            "pfd": 0.0015
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      },
+      "beta10": {
+        "unmitigated": 0.1,
+        "mitigated": 0.0000028500000000000002,
+        "tolerable": 0.000001,
+        "meets": false,
+        "gapFactor": 2.8500000000000005,
+        "margin": null,
+        "requiredExtraPfd": 0.3508771929824561,
+        "requiredSil": "No SIL (PFD >= 0.1)",
+        "groups": [
+          {
+            "layers": [
+              "ALM",
+              "TRIP"
+            ],
+            "dependent": true,
+            "pfd": 0.00285
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      }
+    },
+    "E": {
+      "label": "Fix: separate transmitter and SIL 2 trip",
+      "ie": 0.1,
+      "strict": {
+        "unmitigated": 0.1,
+        "mitigated": 5.000000000000001e-7,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.5000000000000001,
+        "margin": 1.9999999999999996,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.005
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      },
+      "naive": {
+        "unmitigated": 0.1,
+        "mitigated": 5.000000000000001e-7,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.5000000000000001,
+        "margin": 1.9999999999999996,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.005
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      },
+      "beta10": {
+        "unmitigated": 0.1,
+        "mitigated": 5.000000000000001e-7,
+        "tolerable": 0.000001,
+        "meets": true,
+        "gapFactor": 0.5000000000000001,
+        "margin": 1.9999999999999996,
+        "requiredExtraPfd": null,
+        "requiredSil": "None - target met",
+        "groups": [
+          {
+            "layers": [
+              "ALM"
+            ],
+            "dependent": false,
+            "pfd": 0.1
+          },
+          {
+            "layers": [
+              "TRIP"
+            ],
+            "dependent": false,
+            "pfd": 0.005
+          },
+          {
+            "layers": [
+              "PSV"
+            ],
+            "dependent": false,
+            "pfd": 0.01
+          }
+        ]
+      }
+    }
+  },
+  "faultTree": {
+    "coursework": {
+      "P9": 0.06763376000000001,
+      "P10": 0.048722855928,
+      "P11": 0.124927855928,
+      "P12": 0.11306130598365108,
+      "P13": 0.014124506544957087
+    },
+    "correctedProbOnly": {
+      "P10": 0.04814457082599999,
+      "P11": 0.11986837407200013
+    },
+    "corrected": {
+      "P1": {
+        "value": 0.05,
+        "kind": "frequency"
+      },
+      "P2": {
+        "value": 0.02,
+        "kind": "frequency"
+      },
+      "G9": {
+        "value": 0.07,
+        "kind": "frequency"
+      },
+      "P3": {
+        "value": 0.0263,
+        "kind": "frequency"
+      },
+      "P4": {
+        "value": 0.02,
+        "kind": "frequency"
+      },
+      "P5": {
+        "value": 0.003,
+        "kind": "frequency"
+      },
+      "G10": {
+        "value": 0.049300000000000004,
+        "kind": "frequency"
+      },
+      "G12": {
+        "value": 0.11930000000000002,
+        "kind": "frequency"
+      },
+      "P6": {
+        "value": 0.0392,
+        "kind": "probability"
+      },
+      "P7": {
+        "value": 0.0429,
+        "kind": "probability"
+      },
+      "P8": {
+        "value": 0.0429,
+        "kind": "probability"
+      },
+      "G11": {
+        "value": 0.11986837407200013,
+        "kind": "probability"
+      },
+      "TOP": {
+        "value": 0.014300297026789617,
+        "kind": "frequency"
+      }
+    }
+  },
+  "eventTree": {
+    "pIsolationFail": 0.01765456200000004,
+    "unisolated": 0.00046431498060000106,
+    "outcomes": {
+      "O1": 0.0258356850194,
+      "O2": 0.000046431498060000106,
+      "O3": 0.00006268252238100014,
+      "O4": 0.00006268252238100014,
+      "O5": 0.00029251843777800067
+    },
+    "checkSum": 0.0263,
+    "initiating": 0.0263,
+    "courseworkIsolationFail": 0.006310014500000016
+  },
+  "mismatches": [
+    "GD"
+  ]
+}
