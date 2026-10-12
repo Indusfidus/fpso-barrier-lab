@@ -1,0 +1,563 @@
+{
+  "F1": {
+    "title": "HP separator gas blowby to LP separator",
+    "severity": "Catastrophic",
+    "tolerable": 0.000001,
+    "cases": {
+      "A": {
+        "label": "As found",
+        "naive": {
+          "unmitigated": 0.1,
+          "mitigated": 0.0000015,
+          "tolerable": 0.000001,
+          "meets": false,
+          "gapFactor": 1.5,
+          "margin": null,
+          "requiredExtraPfd": 0.6666666666666666,
+          "requiredSil": "No SIL (PFD >= 0.1)",
+          "groups": [
+            {
+              "layers": [
+                "ALM"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.015
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        },
+        "strict": {
+          "unmitigated": 0.1,
+          "mitigated": 0.0015,
+          "tolerable": 0.000001,
+          "meets": false,
+          "gapFactor": 1500,
+          "margin": null,
+          "requiredExtraPfd": 0.0006666666666666666,
+          "requiredSil": "SIL 3",
+          "groups": [
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.015
+            }
+          ],
+          "rejected": [
+            {
+              "id": "ALM",
+              "name": "Low level alarm LAL + operator closes inlet",
+              "reasons": [
+                "Shares LT-1 with the initiating event"
+              ]
+            },
+            {
+              "id": "PSV",
+              "name": "LP separator PSV",
+              "reasons": [
+                "Not sized for this scenario"
+              ]
+            }
+          ]
+        }
+      },
+      "B": {
+        "label": "Fix",
+        "naive": {
+          "unmitigated": 0.1,
+          "mitigated": 5.000000000000001e-7,
+          "tolerable": 0.000001,
+          "meets": true,
+          "gapFactor": 0.5000000000000001,
+          "margin": 1.9999999999999996,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "ALM"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.005
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        },
+        "strict": {
+          "unmitigated": 0.1,
+          "mitigated": 5.000000000000001e-7,
+          "tolerable": 0.000001,
+          "meets": true,
+          "gapFactor": 0.5000000000000001,
+          "margin": 1.9999999999999996,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "ALM"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.005
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        }
+      }
+    }
+  },
+  "F2": {
+    "title": "Reinjection compressor discharge blocked",
+    "severity": "Catastrophic",
+    "tolerable": 0.000001,
+    "cases": {
+      "A": {
+        "label": "As found",
+        "naive": {
+          "unmitigated": 0.1,
+          "mitigated": 5.000000000000001e-7,
+          "tolerable": 0.000001,
+          "meets": true,
+          "gapFactor": 0.5000000000000001,
+          "margin": 1.9999999999999996,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "ALM"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.005
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        },
+        "strict": {
+          "unmitigated": 0.1,
+          "mitigated": 0.000005,
+          "tolerable": 0.000001,
+          "meets": false,
+          "gapFactor": 5.000000000000001,
+          "margin": null,
+          "requiredExtraPfd": 0.19999999999999998,
+          "requiredSil": "No SIL (PFD >= 0.1)",
+          "groups": [
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.005
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": [
+            {
+              "id": "ALM",
+              "name": "High pressure alarm PAH + operator trips compressor",
+              "reasons": [
+                "Only 1 min to respond"
+              ]
+            }
+          ]
+        }
+      },
+      "B": {
+        "label": "Fix",
+        "naive": {
+          "unmitigated": 0.1,
+          "mitigated": 5.000000000000001e-7,
+          "tolerable": 0.000001,
+          "meets": true,
+          "gapFactor": 0.5000000000000001,
+          "margin": 1.9999999999999996,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.0005
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        },
+        "strict": {
+          "unmitigated": 0.1,
+          "mitigated": 5.000000000000001e-7,
+          "tolerable": 0.000001,
+          "meets": true,
+          "gapFactor": 0.5000000000000001,
+          "margin": 1.9999999999999996,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.0005
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        }
+      }
+    }
+  },
+  "F3": {
+    "title": "TEG regenerator overpressure (from coursework LOPA-01)",
+    "severity": "Major",
+    "tolerable": 0.00001,
+    "cases": {
+      "A": {
+        "label": "As found",
+        "naive": {
+          "unmitigated": 0.1,
+          "mitigated": 0.0000015,
+          "tolerable": 0.00001,
+          "meets": true,
+          "gapFactor": 0.15,
+          "margin": 6.666666666666667,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "ALM",
+                "SIF"
+              ],
+              "dependent": true,
+              "pfd": 0.0015
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        },
+        "strict": {
+          "unmitigated": 0.1,
+          "mitigated": 0.000014999999999999999,
+          "tolerable": 0.00001,
+          "meets": false,
+          "gapFactor": 1.4999999999999998,
+          "margin": null,
+          "requiredExtraPfd": 0.6666666666666667,
+          "requiredSil": "No SIL (PFD >= 0.1)",
+          "groups": [
+            {
+              "layers": [
+                "ALM",
+                "SIF"
+              ],
+              "dependent": true,
+              "pfd": 0.015
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        }
+      },
+      "B": {
+        "label": "Fix",
+        "naive": {
+          "unmitigated": 0.1,
+          "mitigated": 0.0000015,
+          "tolerable": 0.00001,
+          "meets": true,
+          "gapFactor": 0.15,
+          "margin": 6.666666666666667,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "ALM"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.015
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        },
+        "strict": {
+          "unmitigated": 0.1,
+          "mitigated": 0.0000015,
+          "tolerable": 0.00001,
+          "meets": true,
+          "gapFactor": 0.15,
+          "margin": 6.666666666666667,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "ALM"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.015
+            },
+            {
+              "layers": [
+                "PSV"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        }
+      }
+    }
+  },
+  "F4": {
+    "title": "Cargo tank overfill (Buncefield analogue)",
+    "severity": "Major",
+    "tolerable": 0.00001,
+    "cases": {
+      "A": {
+        "label": "As found",
+        "naive": {
+          "unmitigated": 0.1,
+          "mitigated": 0.000015000000000000002,
+          "tolerable": 0.00001,
+          "meets": false,
+          "gapFactor": 1.5,
+          "margin": null,
+          "requiredExtraPfd": 0.6666666666666666,
+          "requiredSil": "No SIL (PFD >= 0.1)",
+          "groups": [
+            {
+              "layers": [
+                "HLA"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "HHA",
+                "SIF"
+              ],
+              "dependent": true,
+              "pfd": 0.0015
+            }
+          ],
+          "rejected": []
+        },
+        "strict": {
+          "unmitigated": 0.1,
+          "mitigated": 0.0015,
+          "tolerable": 0.00001,
+          "meets": false,
+          "gapFactor": 150,
+          "margin": null,
+          "requiredExtraPfd": 0.006666666666666667,
+          "requiredSil": "SIL 2",
+          "groups": [
+            {
+              "layers": [
+                "HHA",
+                "SIF"
+              ],
+              "dependent": true,
+              "pfd": 0.015
+            }
+          ],
+          "rejected": [
+            {
+              "id": "HLA",
+              "name": "High level alarm from the radar gauge",
+              "reasons": [
+                "Shares RLG-1 with the initiating event"
+              ]
+            }
+          ]
+        }
+      },
+      "B": {
+        "label": "Fix",
+        "naive": {
+          "unmitigated": 0.1,
+          "mitigated": 5.000000000000001e-7,
+          "tolerable": 0.00001,
+          "meets": true,
+          "gapFactor": 0.05,
+          "margin": 20,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "HHA"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.005
+            },
+            {
+              "layers": [
+                "OVF"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        },
+        "strict": {
+          "unmitigated": 0.1,
+          "mitigated": 5.000000000000001e-7,
+          "tolerable": 0.00001,
+          "meets": true,
+          "gapFactor": 0.05,
+          "margin": 20,
+          "requiredExtraPfd": null,
+          "requiredSil": "None - target met",
+          "groups": [
+            {
+              "layers": [
+                "HHA"
+              ],
+              "dependent": false,
+              "pfd": 0.1
+            },
+            {
+              "layers": [
+                "SIF"
+              ],
+              "dependent": false,
+              "pfd": 0.005
+            },
+            {
+              "layers": [
+                "OVF"
+              ],
+              "dependent": false,
+              "pfd": 0.01
+            }
+          ],
+          "rejected": []
+        }
+      }
+    }
+  }
+}

@@ -37,8 +37,30 @@ const groupBySensor = (layers) => {
 // LOPA. mode: "strict" (CCPS: credit only best layer in a dependent group)
 //             "beta"   (group PFD = (1 - beta) x product + beta x min)
 //             "naive"  (multiply everything, ignores dependence - shows the error)
+// IPL validity checks used in strict and beta modes (CCPS-style):
+//  - a layer sharing a sensor with the initiating event is not independent of the cause
+//  - a human layer needs enough time to respond (default 10 minutes)
+//  - a relief device must be sized for this scenario
+export const MIN_HUMAN_RESPONSE_MIN = 10;
+export function iplChecks(layer, initiatingEvent) {
+  const reasons = [];
+  if (layer.sensor && initiatingEvent.sensor && layer.sensor === initiatingEvent.sensor)
+    reasons.push(`Shares ${layer.sensor} with the initiating event`);
+  if (layer.kind === "human" && layer.responseTimeMin != null && layer.responseTimeMin < MIN_HUMAN_RESPONSE_MIN)
+    reasons.push(`Only ${layer.responseTimeMin} min to respond`);
+  if (layer.sizedForScenario === false) reasons.push("Not sized for this scenario");
+  return reasons;
+}
+
 export function lopa({ initiatingEvent, enablingProbability = 1, layers }, tolerable, { mode = "strict", beta = 0.1 } = {}) {
-  const credited = layers.filter((l) => l.credited);
+  const rejected = [];
+  const credited = layers.filter((l) => {
+    if (!l.credited) return false;
+    if (mode === "naive") return true;
+    const why = iplChecks(l, initiatingEvent);
+    if (why.length) rejected.push({ id: l.id, name: l.name, reasons: why });
+    return why.length === 0;
+  });
   const groups = groupBySensor(credited);
   const groupResults = groups.map((g) => {
     const pfds = g.map((l) => l.pfd);
@@ -60,6 +82,7 @@ export function lopa({ initiatingEvent, enablingProbability = 1, layers }, toler
     requiredExtraPfd,
     requiredSil: requiredExtraPfd ? silBand(requiredExtraPfd) : "None - target met",
     groups: groupResults,
+    rejected,
   };
 }
 

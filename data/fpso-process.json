@@ -1,0 +1,179 @@
+{
+  "id": "fpso-generic-oil-gas-reinjection",
+  "title": "Generic deepwater FPSO: oil production with gas reinjection",
+  "purpose": "Learning case for process safety and barrier risk. Typical design values, not any operator's facility.",
+  "basisOfDesign": {
+    "oilBpd": 210000,
+    "gasReinjectionMmscfd": 340,
+    "waterInjectionBpd": 150000,
+    "storageBbl": 2200000,
+    "pob": 100,
+    "waterDepthM": 1200,
+    "mooring": "Spread-moored",
+    "hullLengthM": 285,
+    "hullBreadthM": 63,
+    "fluid": {
+      "type": "Light-medium crude with associated gas",
+      "gorScfPerBbl": 1620,
+      "h2sPpmv": 50,
+      "co2MolPct": 2,
+      "arrivalPressureBarg": 30,
+      "arrivalTempC": 60,
+      "note": "GOR is derived from 340 MMscf/d gas / 210,000 bbl/d oil. H2S and CO2 are ASSUMED for learning (slightly sour)."
+    },
+    "assumptionNote": "Capacities from public sources for an Erha-class FPSO. All operating conditions are typical values, marked ASSUMED."
+  },
+  "systems": [
+    {
+      "id": "SEP", "name": "Oil separation and treatment", "deckZone": [125, 160],
+      "description": "Three-phase HP separation, LP flash, heating with hot oil, electrostatic dehydration, cooling to cargo tanks.",
+      "equipment": [
+        { "tag": "V-2001", "name": "HP separator (3-phase)", "op": "15 barg, 75 °C", "design": "25 barg" },
+        { "tag": "E-2001", "name": "Crude heater (hot oil)", "op": "75 → 85 °C" },
+        { "tag": "V-2002", "name": "LP separator", "op": "3 barg, 85 °C", "design": "10 barg" },
+        { "tag": "V-2003", "name": "Electrostatic coalescer", "op": "2.5 barg, 85 °C, BS&W < 0.5%" },
+        { "tag": "E-2002", "name": "Crude cooler (seawater)", "op": "85 → 45 °C" }
+      ],
+      "majorHazards": ["Gas blowby from HP to LP separator", "Loss of containment of hot crude", "Separator overpressure on blocked outlet"]
+    },
+    {
+      "id": "CMP", "name": "Gas compression (LP and HP)", "deckZone": [160, 190],
+      "description": "LP flash gas compressed to HP separator pressure, combined gas compressed to TEG contactor pressure.",
+      "equipment": [
+        { "tag": "V-2301", "name": "LP compressor suction scrubber", "op": "2.5 barg" },
+        { "tag": "K-2301", "name": "LP compressor", "op": "2.5 → 15 barg" },
+        { "tag": "V-2302", "name": "HP compressor suction scrubber", "op": "15 barg" },
+        { "tag": "K-2302", "name": "HP compressor", "op": "15 → 70 barg" },
+        { "tag": "E-2302", "name": "HP compressor aftercooler", "op": "to 35 °C" }
+      ],
+      "majorHazards": ["Liquid carryover into compressor", "Compressor seal leak", "Surge damage"]
+    },
+    {
+      "id": "TEG", "name": "Gas dehydration (TEG)", "deckZone": [190, 210],
+      "description": "Gas dried by triethylene glycol in a contactor. Rich TEG is flashed, heated and regenerated in a still column with a hot-oil reboiler. Mirrors the coursework amine unit.",
+      "equipment": [
+        { "tag": "V-2401", "name": "Contactor inlet scrubber", "op": "70 barg, 35 °C", "coursework": "V-4401 Feed gas KO drum" },
+        { "tag": "V-2402", "name": "Contactor inlet filter coalescer", "op": "70 barg", "coursework": "V-4402 Feed gas filter coalescer" },
+        { "tag": "C-2401", "name": "TEG contactor", "op": "70 barg, 35 °C", "coursework": "C-4401 Amine absorber" },
+        { "tag": "V-2404", "name": "Rich TEG flash drum", "op": "4 barg", "coursework": "V-4404 Rich amine flash drum" },
+        { "tag": "E-2404", "name": "Glycol/glycol exchanger", "op": "Rich TEG heated to 150 °C", "coursework": "E-4404A/B/C Rich/lean exchanger" },
+        { "tag": "C-2402", "name": "TEG regenerator (still column)", "op": "0.1 barg", "design": "3.5 barg", "coursework": "C-4402 Amine regenerator" },
+        { "tag": "E-2406", "name": "TEG reboiler (hot oil)", "op": "200 °C max", "note": "TEG degrades above about 204 °C. Reboiler temperature control is a quality and safety limit.", "coursework": "E-4406A/B Reboiler" },
+        { "tag": "E-2402", "name": "Still column reflux condenser", "op": "Overhead to 100 °C", "coursework": "EA-4402 Reflux condenser" },
+        { "tag": "V-2406", "name": "Still vent KO drum / BTEX condenser", "op": "Near atmospheric", "coursework": "V-4406 Reflux drum" },
+        { "tag": "P-2405A/B", "name": "Lean TEG circulation pumps", "op": "to 70 barg", "coursework": "P-4405A/B Reflux pumps" },
+        { "tag": "V-2405", "name": "TEG charcoal filter", "coursework": "V-4405 Charcoal filter" },
+        { "tag": "T-2401", "name": "TEG storage tank", "coursework": "T-4401 Amine storage tank" }
+      ],
+      "majorHazards": ["Regenerator overpressure (loss of cooling or blocked vent)", "Glycol/glycol exchanger tube rupture", "Hydrocarbon carryover flashing in reboiler", "Gas blowby from contactor to flash drum"]
+    },
+    {
+      "id": "INJ", "name": "Gas reinjection compression", "deckZone": [210, 235],
+      "description": "Dry gas compressed to reservoir injection pressure. Fuel gas is taken off upstream.",
+      "equipment": [
+        { "tag": "V-2701", "name": "Reinjection compressor suction scrubber", "op": "68 barg" },
+        { "tag": "K-2701", "name": "Gas reinjection compressor", "op": "68 → 350 barg", "design": "385 barg discharge" },
+        { "tag": "E-2701", "name": "Reinjection aftercooler", "op": "to 50 °C" },
+        { "tag": "SDV-2701", "name": "Injection riser ESD valve", "op": "350 barg" }
+      ],
+      "majorHazards": ["Discharge overpressure on blocked outlet", "High-pressure gas release and jet fire", "Riser failure"]
+    },
+    {
+      "id": "FG", "name": "Fuel gas", "deckZone": [185, 195],
+      "description": "Dry gas let down to 25 barg, superheated and filtered for the gas turbines.",
+      "equipment": [ { "tag": "V-2801", "name": "Fuel gas KO drum", "op": "25 barg" } ],
+      "majorHazards": ["Overpressure of fuel gas system on let-down valve failure"]
+    },
+    {
+      "id": "PW", "name": "Produced water treatment", "deckZone": [105, 125],
+      "description": "Water from separators treated by hydrocyclones and a degassing / flotation unit, then discharged overboard within the local oil-in-water limit.",
+      "equipment": [
+        { "tag": "A-4401", "name": "Hydrocyclones", "op": "13 barg inlet" },
+        { "tag": "V-4402", "name": "Degasser / induced gas flotation", "op": "0.5 barg" }
+      ],
+      "majorHazards": ["Oil overboard (environmental)", "Gas blowby to degasser"]
+    },
+    {
+      "id": "WI", "name": "Seawater injection", "deckZone": [80, 105],
+      "description": "Seawater lifted, filtered, sulphate removed, deaerated and pumped to injection wells.",
+      "equipment": [
+        { "tag": "P-5001", "name": "Seawater lift pumps", "op": "Lift to 6 barg" },
+        { "tag": "A-5002", "name": "Sulphate removal unit (nanofiltration)", "op": "25 barg" },
+        { "tag": "V-5003", "name": "Vacuum deaerator", "op": "Vacuum" },
+        { "tag": "P-5004", "name": "Water injection pumps", "op": "to 250 barg" }
+      ],
+      "majorHazards": ["High-pressure water release (personnel injury)", "Chemical handling (biocide, oxygen scavenger)"]
+    },
+    {
+      "id": "HO", "name": "Hot oil system", "deckZone": [60, 80],
+      "description": "Waste heat recovery on gas turbine exhausts heats hot oil. Hot oil serves the crude heater and TEG reboiler. Links to the coursework hot oil HAZOP.",
+      "equipment": [
+        { "tag": "H-4101", "name": "Waste heat recovery units", "op": "Hot oil to 230 °C" },
+        { "tag": "V-4101", "name": "Hot oil expansion drum", "op": "N2 blanketed" },
+        { "tag": "P-4101", "name": "Hot oil circulation pumps" }
+      ],
+      "majorHazards": ["Hot oil leak above autoignition temperature", "Process gas leaking into hot oil via tube rupture"]
+    },
+    {
+      "id": "PWR", "name": "Power generation", "deckZone": [35, 60],
+      "description": "Dual-fuel gas turbine generators.",
+      "equipment": [ { "tag": "G-8001A-D", "name": "Gas turbine generators (4 × 25 MW)", "op": "Fuel gas or diesel" } ],
+      "majorHazards": ["Fuel gas leak in turbine enclosure", "Loss of main power"]
+    },
+    {
+      "id": "FLR", "name": "Flare", "deckZone": [255, 275],
+      "description": "HP and LP flares with flare gas recovery for normally zero flaring. Receives PSV and blowdown flows.",
+      "equipment": [
+        { "tag": "V-4301", "name": "HP flare KO drum" },
+        { "tag": "V-4302", "name": "LP flare KO drum" },
+        { "tag": "X-4301", "name": "Flare tower with HP and LP tips" }
+      ],
+      "majorHazards": ["Flare KO drum liquid overfill (burning liquid rain-out)", "Thermal radiation during blowdown"]
+    },
+    {
+      "id": "CT", "name": "Cargo tanks and offloading", "deckZone": [40, 260],
+      "description": "Crude stored in cargo tanks under inert gas. Offloaded via floating hoses to a CALM buoy.",
+      "equipment": [
+        { "tag": "T-6001-12", "name": "Cargo tanks", "op": "Atmospheric, inert gas blanket, 45 °C" },
+        { "tag": "P-6001", "name": "Cargo offloading pumps" },
+        { "tag": "X-6002", "name": "Offloading hose reel (starboard quarter)" }
+      ],
+      "majorHazards": ["Cargo tank overfill", "Loss of inerting (explosive atmosphere)", "Hose rupture during offloading (spill)"]
+    },
+    {
+      "id": "RSR", "name": "Riser balcony and manifolds", "deckZone": [120, 200],
+      "description": "Production, gas injection and water injection risers hang off the port side balcony.",
+      "equipment": [ { "tag": "SDV-1001", "name": "Production riser ESD valves" } ],
+      "majorHazards": ["Riser rupture with full inventory release", "Dropped objects onto risers"]
+    },
+    {
+      "id": "ACC", "name": "Accommodation, temporary refuge, helideck, lifeboats", "deckZone": [0, 35],
+      "description": "Living quarters for 100 people, temporary refuge, helideck and lifeboats, at the stern away from the flare.",
+      "equipment": [],
+      "majorHazards": ["Smoke or gas ingress into temporary refuge", "Helicopter accident"]
+    }
+  ],
+  "flows": [
+    ["Risers", "V-2001", "well fluids"],
+    ["V-2001", "E-2001", "oil"], ["E-2001", "V-2002", "oil"], ["V-2002", "V-2003", "oil"], ["V-2003", "E-2002", "oil"], ["E-2002", "Cargo tanks", "oil"], ["Cargo tanks", "Offloading", "oil"],
+    ["V-2002", "K-2301", "LP gas"], ["K-2301", "K-2302", "gas"], ["V-2001", "K-2302", "HP gas"], ["K-2302", "C-2401", "gas"], ["C-2401", "K-2701", "dry gas"], ["K-2701", "Gas injection wells", "gas"],
+    ["C-2401", "Fuel gas", "dry gas"], ["Fuel gas", "Power", "fuel"],
+    ["V-2001", "Produced water", "water"], ["V-2002", "Produced water", "water"], ["Produced water", "Overboard", "water"],
+    ["Seawater", "Water injection", "water"], ["Water injection", "Water injection wells", "water"],
+    ["Power", "Hot oil", "exhaust heat"], ["Hot oil", "E-2001", "heat"], ["Hot oil", "E-2406", "heat"]
+  ],
+  "riskCriteria": {
+    "note": "Example scenario frequency targets for LOPA, for learning. Companies set their own.",
+    "bySeverity": [
+      { "severity": "Catastrophic", "description": "Multiple fatalities or major escalation", "tolerablePerYear": 1e-6 },
+      { "severity": "Major", "description": "Single fatality or major environmental release", "tolerablePerYear": 1e-5 },
+      { "severity": "Serious", "description": "Lost time injury or significant release", "tolerablePerYear": 1e-4 }
+    ]
+  },
+  "personnelSafetyTasks": [
+    { "task": "Hot work (welding) on a pipe support in the separation module", "permit": "Hot work permit", "key": ["Gas test before and during work", "Isolate and purge nearby lines", "Fire watch", "Check SIMOPS conflicts (no venting, no offloading start)"] },
+    { "task": "Confined space entry into a cargo tank for inspection", "permit": "Confined space entry permit", "key": ["Gas free and ventilate (O2, LEL, H2S, benzene)", "Isolate inert gas and cargo lines with blinds", "Standby person and rescue plan", "Continuous monitoring"] },
+    { "task": "Crane lift of a compressor spare over live plant", "permit": "Lifting plan (critical lift)", "key": ["Lift plan and weather limits", "Exclusion zone", "Avoid lifting over risers and live hydrocarbon lines", "Competent banksman"] },
+    { "task": "Tandem offloading to a shuttle tanker via CALM buoy", "permit": "Offloading procedure", "key": ["Weather window", "Hose inspection and pressure test", "Emergency release coupling check", "No hot work or helicopter ops during offloading (SIMOPS)"] }
+  ]
+}

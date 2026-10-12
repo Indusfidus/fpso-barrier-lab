@@ -1,0 +1,56 @@
+digraph FPSO {
+  graph [rankdir=LR, fontname="Helvetica", fontsize=11, nodesep=0.35, ranksep=0.5, bgcolor="white", pad=0.3,
+         label="Generic FPSO block flow diagram (oil production with gas reinjection)", labelloc=t, fontsize=14];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, color="#5b6573", fillcolor="#ffffff", penwidth=1.1];
+  edge  [fontname="Helvetica", fontsize=8, color="#5b6573", arrowsize=0.7];
+
+  risers [label="Production risers\n30 barg, 60 °C", fillcolor="#e9ecef"];
+
+  subgraph cluster_oil { label="Oil separation and treatment"; style="rounded"; color="#2e7d32"; fontcolor="#2e7d32";
+    hp  [label="V-2001\nHP separator\n15 barg"];
+    htr [label="E-2001\nCrude heater"];
+    lp  [label="V-2002\nLP separator\n3 barg"];
+    ec  [label="V-2003\nElectrostatic\ncoalescer"];
+    clr [label="E-2002\nCrude cooler"];
+  }
+  tanks [label="Cargo tanks\n2.2 MMbbl, inerted", fillcolor="#e8f5e9", color="#2e7d32"];
+  off   [label="Offloading\nhoses to CALM buoy", fillcolor="#e9ecef"];
+
+  subgraph cluster_gas { label="Gas compression, dehydration and reinjection"; style="rounded"; color="#c62828"; fontcolor="#c62828";
+    lpc [label="K-2301\nLP compressor\n2.5 → 15 barg"];
+    hpc [label="K-2302\nHP compressor\n15 → 70 barg"];
+    teg [label="C-2401\nTEG contactor\n70 barg"];
+    rinj[label="K-2701\nReinjection compressor\n68 → 350 barg"];
+    regen [label="C-2402 TEG regenerator\n+ E-2406 reboiler", fillcolor="#fdecea"];
+  }
+  gwell [label="Gas injection\nwells", fillcolor="#e9ecef"];
+  fg    [label="Fuel gas\n25 barg"];
+  pwr   [label="G-8001A-D\nGas turbine generators"];
+  ho    [label="Hot oil system\nWHRU, 230 °C", fillcolor="#fff4e5", color="#ef6c00"];
+
+  subgraph cluster_water { label="Water"; style="rounded"; color="#1565c0"; fontcolor="#1565c0";
+    pw  [label="Produced water\nhydrocyclones + degasser"];
+    sw  [label="Seawater lift\nfilters, SRU, deaerator"];
+    wip [label="P-5004\nWater injection pumps\n250 barg"];
+  }
+  ob    [label="Overboard", fillcolor="#e9ecef"];
+  wwell [label="Water injection\nwells", fillcolor="#e9ecef"];
+  flare [label="HP / LP flare + flare gas recovery\nreceives PSV and blowdown\nfrom all systems", fillcolor="#fdecea", color="#c62828"];
+
+  risers -> hp [label="well fluids", penwidth=1.6];
+  hp -> htr -> lp -> ec -> clr -> tanks -> off [color="#2e7d32", penwidth=1.6];
+  lp -> lpc [color="#c62828", xlabel="flash gas"];
+  hp -> hpc [color="#c62828", xlabel="HP gas"];
+  lpc -> hpc -> teg -> rinj -> gwell [color="#c62828", penwidth=1.6];
+  teg -> regen [color="#c62828", style=dashed, label="rich TEG", dir=both];
+  teg -> fg [color="#c62828"];
+  fg -> pwr [color="#c62828"];
+  pwr -> ho [color="#ef6c00", label="exhaust heat"];
+  ho -> htr [color="#ef6c00", style=dashed];
+  ho -> regen [color="#ef6c00", style=dashed];
+  hp -> pw [color="#1565c0", label="water"];
+  lp -> pw [color="#1565c0"];
+  pw -> ob [color="#1565c0"];
+  {rank=same; fg; pwr; ho;}
+  sw -> wip -> wwell [color="#1565c0", penwidth=1.6];
+}
